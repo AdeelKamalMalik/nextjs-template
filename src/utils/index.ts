@@ -10,3 +10,12 @@ export const getHeaders = () => {
     "Content-Type": "application/json",
   }
 }
+
+export const getFileRequestHeader = () => {
+  const token = getAccessToken()
+
+  return {
+    'Content-Type': 'multipart/form-data',
+    "Authorization": `Bearer ${token || ''}`
+  }
+}

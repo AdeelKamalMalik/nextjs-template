@@ -23,6 +23,7 @@ export interface LoginInput {
 // Define the structure of the login response
 export interface LoginResponse {
   jwt: string;
+  user: User
 }
 
 export const signup = async ({ email, password, firstName, lastName, avatar }: SignupInput): Promise<User> => {

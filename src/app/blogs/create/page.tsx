@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createBlog, CreateBlogInput, Blog } from '../../../queries/blog';
+import { createBlog } from '../../../queries/blog';
 import { useForm, FormProvider, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { blogValidationSchema } from '../../../validations';
@@ -12,18 +12,19 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 import { useRouter } from 'next/navigation';
+import { Blog, CreateBlogInput } from '@/types';
 
 export interface BlogFormInputs {
   title: string;
   body: string;
-  image: File | null;
+  image: FileList | null;
 }
 
 export default function CreateBlog() {
   const queryClient = useQueryClient();
   const router = useRouter();
   const methods = useForm<BlogFormInputs>({
-    resolver: yupResolver(blogValidationSchema) as unknown as Resolver<BlogFormInputs, any> | undefined,
+    resolver: yupResolver(blogValidationSchema()) as unknown as Resolver<BlogFormInputs, any> | undefined,
   });
 
   const mutation = useMutation<Blog, Error, CreateBlogInput>({

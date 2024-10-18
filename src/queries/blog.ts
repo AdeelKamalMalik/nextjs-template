@@ -2,56 +2,45 @@
 
 import axios, { AxiosResponse } from 'axios';
 import { apiGet } from '../axios';
-import { User } from '@/types';
+import { Blog, CreateBlogInput, UpdateBlogInput } from '@/types';
+import { getFileRequestHeader } from '@/utils';
 
-// Define the structure of a Blog
-export interface Blog {
-  image: string | undefined;
-  id: string;
-  title: string;
-  body: string;
-  created_at: string;
-  updated_at: string;
-  views: number;
-  user: User
-}
-
-// Define the input for creating a new blog
-export interface CreateBlogInput {
-  title: string;
-  body: string;
-  image: FIle | null;
-}
-
-// Fetch all blogs
-export const fetchBlogs = async (): Promise<Blog[]> => {
-  // Use the common apiGet function
-  const response = await apiGet<AxiosResponse<Blog[]>>('/api/blogs');
-  return response.data
+export const fetchBlogs = async (searchTerm: string, page: number, limit: number): Promise<Blog[]> => {
+  const response = await apiGet<AxiosResponse<Blog[]>>(`/api/blogs?page=${page || 1}&limit=${limit || 10}&search=${searchTerm || ''}`);
+  return response.data;
 };
 
-// Fetch a single blog by slug
 export const fetchBlogBySlug = async (slug: string): Promise<Blog> => {
-  // Use the common apiGet function
   const { data } = await apiGet<AxiosResponse<Blog>>(`/api/blogs/${slug}`);
   return data
 };
 
-// Create a new blog with custom headers for multipart/form-data
 export const createBlog = async ({ title, body, image }: CreateBlogInput): Promise<Blog> => {
   const formData = new FormData();
   formData.append('title', title);
   formData.append('body', body);
 
-  if (image.length) {
+  if (image?.length) {
     formData.append('image', image[0]);
   }
 
-  // Use axios directly here to set custom headers
   const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/blogs`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+    headers: getFileRequestHeader(),
+  });
+  return data;
+};
+
+export const updateBlog = async ({ title, body, image, slug }: UpdateBlogInput): Promise<Blog> => {
+  const formData = new FormData();
+  if (title) formData.append('title', title);
+  if (body) formData.append('body', body);
+
+  if (image?.length) {
+    formData.append('image', image[0]);
+  }
+
+  const { data } = await axios.put(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/blogs/${slug}`, formData, {
+    headers: getFileRequestHeader(),
   });
   return data;
 };

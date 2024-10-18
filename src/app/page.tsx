@@ -9,13 +9,13 @@ export default function HomePage() {
   const token = getAccessToken()
   const router = useRouter();
 
-  useEffect(() => {
-    if (token) {
-      router.push('/blogs');
-    } else {
-      router.push('/auth/signin');
-    }
-  }, [router, token]);
+  // useEffect(() => {
+  //   if (token) {
+  //     router.push('/blogs');
+  //   } else {
+  //     router.push('/auth/signin');
+  //   }
+  // }, [router, token]);
 
   return <p>Redirecting...</p>;
 }

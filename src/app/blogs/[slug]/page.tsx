@@ -1,12 +1,15 @@
-"use client"
+"use client";
 import { useQuery } from '@tanstack/react-query';
-
-import { fetchBlogBySlug, Blog } from '../../../queries/blog';
+import { fetchBlogBySlug } from '../../../queries/blog';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { useParams,  } from 'next/navigation';
+import Link from 'next/link';
+import { useAuth } from '@/context/AuthContext';
+import { Blog } from '@/types';
 
 export default function BlogDetail() {
-  const { slug } = useParams<{ slug: string}>();
+  const { slug } = useParams<{ slug: string }>();
+  const { currentUser } = useAuth()
 
   const { data, isLoading } = useQuery<Blog, Error>({
     queryKey: ['blog', slug],
@@ -59,6 +62,15 @@ export default function BlogDetail() {
           dangerouslySetInnerHTML={{ __html: data?.body || '' }}
         />
       </div>
+
+      {/* Edit Icon (shown if current user is the blog author) */}
+      {currentUser?.id === data?.user.id && (
+        <div className="mt-4 flex justify-end">
+          <Link href={`/blogs/${slug}/edit`} className="text-blue-500 hover:text-blue-700">
+              ✏️ Edit Post
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

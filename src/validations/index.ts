@@ -27,8 +27,20 @@ export const signUpValidationSchema = yup.object({
     }),
 });
 
-export const blogValidationSchema = yup.object().shape({
-  title: yup.string().required('Title is required').min(5, 'Title should be at least 5 characters'),
-  body: yup.string().required('Body is required').min(20, 'Body should be at least 20 characters'),
-  image: yup.mixed().required('Image is required'),
-});
+export const blogValidationSchema = (isUpdate: boolean = false) => {
+  return yup.object().shape({
+    title: yup
+      .string()
+      .required('Title is required')
+      .min(5, 'Title should be at least 5 characters'),
+
+    body: yup
+      .string()
+      .required('Body is required')
+      .min(20, 'Body should be at least 20 characters'),
+
+    image: isUpdate
+      ? yup.mixed().nullable() // Optional for update
+      : yup.mixed().required('Image is required'), // Required for create
+  });
+};

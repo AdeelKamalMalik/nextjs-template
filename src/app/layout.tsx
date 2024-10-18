@@ -27,13 +27,13 @@ export default function Layout({ children }: LayoutProps) {
   const router = useRouter();
 
 
-  useEffect(() => {
-    if (token) {
-      router.push('/blogs');
-    } else {
-      router.push('/auth/signin');
-    }
-  }, [router, token]);
+  // useEffect(() => {
+  //   if (token) {
+  //     router.push('/blogs');
+  //   } else {
+  //     router.push('/auth/signin');
+  //   }
+  // }, [router, token]);
   
   return (
     <html lang="en">

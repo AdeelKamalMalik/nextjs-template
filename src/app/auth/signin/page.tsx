@@ -15,7 +15,6 @@
     const methods = useForm<LoginInput>({
       resolver: yupResolver(loginValidationSchema) as unknown as Resolver<LoginInput, any> | undefined,
     });
-    const router = useRouter();
     const [error, setError] = useState('');
 
     // Use the login mutation with React Query
@@ -23,6 +22,7 @@
       mutationFn: login,
       onSuccess: (data) => {
         localStorage.setItem('jwt', data.jwt);
+        localStorage.setItem('user', data.user.username);
         window.location.href = '/blogs'
       },
       onError: () => {
