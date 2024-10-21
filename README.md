@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Blog Site Frontend (Next.js)
 
-First, run the development server:
+This project is the frontend UI for a blog site, built with Next.js. It utilizes server-side rendering (SSR) and static site generation (SSG) for performance and SEO optimization. The UI integrates with a backend API to fetch and display dynamic blog content.
+
+## Prerequisites
+
+- Node.js (v14+)
+- npm or yarn
+
+## Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone git@github.com:AdeelKamalMalik/nextjs-template.git
+   cd nextjs-template
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+   or if you use yarn:
+
+   ```bash
+   yarn install
+   ```
+
+3. Set up environment variables:
+
+   Create a `.env.local` file to store API-related environment variables:
+
+   ```env
+   NEXT_PUBLIC_API_URL=<your_backend_api_url>
+   ```
+
+## Running the Project
+
+To start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+or with yarn:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Building for Production
 
-## Learn More
+To create an optimized production build:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To start the production server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm start
+```
 
-## Deploy on Vercel
+or with yarn:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+yarn start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License.
