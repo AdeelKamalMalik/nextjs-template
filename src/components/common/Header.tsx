@@ -15,13 +15,12 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="flex justify-between items-center bg-white shadow-md p-4">
-      {/* Logo and Title */}
+    <header className="flex justify-between items-center bg-white shadow-md p-2">
       <div className="flex items-center">
         <Link href="/" className="mr-2">
-          <Image src="/images/logo.png" alt="Logo" width={100} height={100} className="cursor-pointer" />
+          <Image src="/images/logo.png" alt="Logo" width={100} height={60} className="cursor-pointer" />
         </Link>
-        <h1 className="text-xl font-semibold">Blog Title</h1>
+        <h1 className="text-xl font-semibold">Blog Site</h1>
       </div>
 
       {currentUser && (

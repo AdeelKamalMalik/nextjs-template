@@ -28,7 +28,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   });
 
   useEffect(() => {
-    console.log(">>>>>>>>", data)
     if(!isLoading && token && data){
       setIsAuthenticated(true)
       setCurrentUser(data as User)
