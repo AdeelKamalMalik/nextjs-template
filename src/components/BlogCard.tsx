@@ -1,7 +1,8 @@
+import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { BlogCardProps } from '@/types';
-import moment from 'moment'; // Import Moment.js
 
 export default function BlogCard({ blog }: BlogCardProps) {
   return (
@@ -11,7 +12,6 @@ export default function BlogCard({ blog }: BlogCardProps) {
       className="bg-white rounded-lg shadow-lg overflow-hidden transition transform hover:scale-105 w-full"
     >
       <div className="flex items-start space-x-6 p-6" style={{ minHeight: '300px' }}>
-        {/* Persistent Image size */}
         <div>
           <Image
             src={blog.image || ""}
@@ -24,7 +24,6 @@ export default function BlogCard({ blog }: BlogCardProps) {
         </div>
 
         <div className="flex-1 flex flex-col justify-between h-[250px]">
-          {/* Content Section */}
           <div className="flex-grow">
             <h2 className="text-3xl font-semibold mb-4">{blog.title}</h2>
             <div
@@ -33,7 +32,6 @@ export default function BlogCard({ blog }: BlogCardProps) {
             />
           </div>
 
-          {/* User and Date - Positioned at the bottom */}
           <div className="flex items-center justify-between mt-4">
             <div className="flex items-center">
               <Image
@@ -51,9 +49,8 @@ export default function BlogCard({ blog }: BlogCardProps) {
               </div>
             </div>
 
-            {/* Views Count on Bottom Right */}
             <div className="text-gray-700 text-sm bg-gray-100 px-3 py-1 rounded-full shadow">
-              <p>{blog.views} views</p>
+              <p>{blog.views} views and {blog.comments} comments</p>
             </div>
           </div>
         </div>

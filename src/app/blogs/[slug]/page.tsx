@@ -2,10 +2,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchBlogBySlug } from '../../../queries/blog';
 import Image from 'next/image';
-import { useParams,  } from 'next/navigation';
+import { useParams, } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { Blog } from '@/types';
+import BlogPostComments from '@/components/BlogComments';
 
 export default function BlogDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -67,10 +68,12 @@ export default function BlogDetail() {
       {currentUser?.id === data?.user.id && (
         <div className="mt-4 flex justify-end">
           <Link href={`/blogs/${slug}/edit`} className="text-blue-500 hover:text-blue-700">
-              ✏️ Edit Post
+            ✏️ Edit Post
           </Link>
         </div>
       )}
+
+      <BlogPostComments slug={slug} />
     </div>
   );
 }

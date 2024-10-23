@@ -21,6 +21,7 @@ export type Blog = {
   created_at: string;
   updated_at: string;
   views: number;
+  comments: number;
   user: User
   slug: string
 }
@@ -33,6 +34,29 @@ export type CreateBlogInput = {
 
 export type UpdateBlogInput = Partial<CreateBlogInput> & { slug: string }
 
-export type BlogCardProps =  {
+export type BlogCardProps = {
   blog: Blog;
 }
+
+export type Comment = {
+  id: string
+  image: string
+  body: string
+  user: User
+  replies?: Comment[]
+  createdAt: string
+}
+
+export type CommentBoxProps = {
+  comment: Comment
+  isReply?: boolean
+  onReplyClick: () => void;
+}
+
+export type PostCommentPayload = {
+  body: string
+  slug: string
+  image: File | null
+}
+
+export type PostReplyPayload = Omit<PostCommentPayload, 'slug'> & { commentId: string }
