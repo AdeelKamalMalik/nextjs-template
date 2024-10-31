@@ -35,7 +35,7 @@ export default function Signup() {
     mutationFn: signup,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['sign-up'] });
-      router.push('/auth/login')
+      router.push('/auth/signin')
     },
     onError: ()=> {
       setError('Failed to register!')

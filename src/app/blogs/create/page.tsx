@@ -31,7 +31,7 @@ export default function CreateBlog() {
     mutationFn: createBlog,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['blogs'] });
-      router.push('/auth/login')
+      router.push('/blogs')
     },
   });
 
