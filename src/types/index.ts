@@ -60,3 +60,11 @@ export type PostCommentPayload = {
 }
 
 export type PostReplyPayload = Omit<PostCommentPayload, 'slug'> & { commentId: string }
+
+export type Notification = {
+  id: string
+  sender: User
+  blog: Blog
+  read: boolean
+  type: 'comment' | 'reply'
+}

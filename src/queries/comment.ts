@@ -13,7 +13,7 @@ export const fetchComments = async (slug: string): Promise<Comment[]> => {
 export const postComment = async ({ slug, body, image }: PostCommentPayload): Promise<Comment> => {
   const formData = new FormData();
   formData.append('body', body);
-  console.log(image, body, slug)
+
   if (image) {
     formData.append('image', image);
   }
